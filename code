@@ -6,6 +6,12 @@ time.sleep(1)
 print('I will try to guess your number!')
 time.sleep(1)
 number = input('Do you want to write down your number? Y/N: ')
+while True:
+    if number.lower() == 'y' or number.lower() == 'n':
+        break
+    else:
+        print("Sorry! I didn't understand your choice.")
+        number = input('Do you want to write down your number? Y/N: ')
 time.sleep(1)
 if number.lower() == 'y':
     number = input('Write your number here: ')
