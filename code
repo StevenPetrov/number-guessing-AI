@@ -46,12 +46,14 @@ while True:
                 for x in list_nums[::-1]:
                     if x % 2 != 0:
                         list_nums.remove(x)
-            if clue_supp.lower() == 'n':
+            elif clue_supp.lower() == 'n':
                 clues.remove('Is your number even?')
                 clues.remove('Is your number odd')
                 for x in list_nums[::-1]:
                     if x % 2 == 0:
                         list_nums.remove(x)
+            else:
+                pass
         elif ask == 'Is your number odd':
             clue_supp = input('Is your number odd? Y/N: ')
             if clue_supp.lower() == 'y':
@@ -60,35 +62,44 @@ while True:
                 for x in list_nums[::-1]:
                     if x % 2 == 0:
                         list_nums.remove(x)
-            if clue_supp.lower() == 'n':
+            elif clue_supp.lower() == 'n':
                 clues.remove('Is your number even?')
                 clues.remove('Is your number odd')
                 for x in list_nums[::-1]:
                     if x % 2 != 0:
                         list_nums.remove(x)
+            else:
+                pass
         elif ask == 'Is my number greater than yours?':
             clue_supp = input('Is your number greater than mine? Y/N: ')
             if clue_supp.lower() == 'y':
                 for x in list_nums[::-1]:
                     if num > x:
                         list_nums.remove(x)
-            else:
+            elif clue_supp.lower() == 'n':
                 for x in list_nums[::-1]:
                     if num < x:
                         list_nums.remove(x)
+            else:
+                pass
         elif ask == 'Is my number smaller than yours?':
             clue_supp = input('Is your number smaller than mine? Y/N: ')
             if clue_supp.lower() == 'y':
                 for x in list_nums[::-1]:
                     if num < x:
                         list_nums.remove(x)
-            else:
+            elif clue_supp.lower() == 'n':
                 for x in list_nums[::-1]:
                     if num > x:
                         list_nums.remove(x)
+            else:
+                pass
         num = random.choice(list_nums)
         print(num)
         guess_count += 1
         if num == number:
+            print(f'Woah, I did it! ^^ It took me only {guess_count} tries')
+            break
+        if len(list_nums) == 1:
             print(f'Woah, I did it! ^^ It took me only {guess_count} tries')
             break
