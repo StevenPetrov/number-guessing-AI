@@ -1,0 +1,94 @@
+import time
+import random
+
+print('Hello :) This is the number guessing AI.')
+time.sleep(1)
+print('I will try to guess your number!')
+time.sleep(1)
+number = input('Do you want to write down your number? Y/N: ')
+time.sleep(1)
+if number.lower() == 'y':
+    number = input('Write your number here: ')
+    while True:
+        if number.isdigit():
+            number = int(number)
+            break
+        else:
+            print("Oops. You didn't write a number. Please try again.")
+            number = input('Write your number here: ')
+
+elif number.lower() == 'n':
+    print('OK! Now you just have to think about your number and give me clues when i ask. :)')
+    time.sleep(1)
+    print('Your number must be between 1 and 1000.')
+    time.sleep(1)
+list_nums = list(range(1, 1001))
+clues = ['Is my number greater than yours?', 'Is my number smaller than yours?', 'Is your number even?',
+         'Is your number odd']
+guess_count = 1
+
+num = random.choice(list_nums)
+print(num)
+
+while True:
+    command = input('Is this your number? Y/N: ')
+    if command.lower() == 'y':
+        print(f'Woah, I did it! ^^ It took me only {guess_count} tries')
+        break
+    else:
+        list_nums.remove(num)
+        ask = random.choice(clues)
+        if ask == 'Is your number even?':
+            clue_supp = input('Is your number even? Y/N: ')
+            if clue_supp.lower() == 'y':
+                clues.remove('Is your number even?')
+                clues.remove('Is your number odd')
+                for x in list_nums[::-1]:
+                    if x % 2 != 0:
+                        list_nums.remove(x)
+            if clue_supp.lower() == 'n':
+                clues.remove('Is your number even?')
+                clues.remove('Is your number odd')
+                for x in list_nums[::-1]:
+                    if x % 2 == 0:
+                        list_nums.remove(x)
+        elif ask == 'Is your number odd':
+            clue_supp = input('Is your number odd? Y/N: ')
+            if clue_supp.lower() == 'y':
+                clues.remove('Is your number even?')
+                clues.remove('Is your number odd')
+                for x in list_nums[::-1]:
+                    if x % 2 == 0:
+                        list_nums.remove(x)
+            if clue_supp.lower() == 'n':
+                clues.remove('Is your number even?')
+                clues.remove('Is your number odd')
+                for x in list_nums[::-1]:
+                    if x % 2 != 0:
+                        list_nums.remove(x)
+        elif ask == 'Is my number greater than yours?':
+            clue_supp = input('Is your number greater than mine? Y/N: ')
+            if clue_supp.lower() == 'y':
+                for x in list_nums[::-1]:
+                    if num > x:
+                        list_nums.remove(x)
+            else:
+                for x in list_nums[::-1]:
+                    if num < x:
+                        list_nums.remove(x)
+        elif ask == 'Is my number smaller than yours?':
+            clue_supp = input('Is your number smaller than mine? Y/N: ')
+            if clue_supp.lower() == 'y':
+                for x in list_nums[::-1]:
+                    if num < x:
+                        list_nums.remove(x)
+            else:
+                for x in list_nums[::-1]:
+                    if num > x:
+                        list_nums.remove(x)
+        num = random.choice(list_nums)
+        print(num)
+        guess_count += 1
+        if num == number:
+            print(f'Woah, I did it! ^^ It took me only {guess_count} tries')
+            break
